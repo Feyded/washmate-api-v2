@@ -1,97 +1,68 @@
-# Architecture Standards
+# Architecture
 
-## Architecture Style
+The project uses a **Hybrid Feature-Based Architecture**.
 
-Use a **hybrid feature-based architecture**.
+## Rules
 
-Follow Laravel's standard directory structure, but group related files by feature/domain where appropriate.
+* Organize code by **feature/functionality**.
+* Do **not** use Domain-Driven Design (DDD).
+* Do not introduce `Domain`, `Entities`, `Aggregates`, `ValueObjects`, `Repositories`, or `DomainServices`.
+* Follow Laravel conventions where appropriate.
+* Keep related functionality grouped by feature.
 
-Do **not** use a separate `app/Features` directory or full Domain-Driven Design architecture.
-
-Example:
+## Structure
 
 ```text
 app/
 ├── Http/
 │   ├── Controllers/
-│   │   ├── Admin/
-│   │   │   ├── Organization/
-│   │   │   ├── Employee/
-│   │   │   └── Leave/
-│   │   ├── Employee/
-│   │   └── ...
+│   │   └── Admin/
+│   │       └── Organization/
+│   │           ├── CompanyController.php
+│   │           ├── DepartmentController.php
+│   │           └── DepartmentPositionController.php
 │   │
 │   ├── Requests/
-│   │   ├── Admin/
-│   │   │   ├── Organization/
-│   │   │   ├── Employee/
-│   │   │   └── Leave/
-│   │   └── ...
+│   │   └── Admin/
+│   │       └── Organization/
 │   │
 │   └── Resources/
-│       ├── Admin/
-│       ├── Employee/
-│       └── ...
+│       └── Admin/
+│           └── Organization/
 │
 ├── Models/
+│   ├── Company.php
+│   ├── Department.php
+│   └── DepartmentPosition.php
+│
 ├── Policies/
-├── Services/
-└── ...
+│   ├── CompanyPolicy.php
+│   ├── DepartmentPolicy.php
+│   └── DepartmentPositionPolicy.php
+│
+└── Services/
+    └── Admin/
+        └── Organization/
+            ├── CompanyService.php
+            ├── DepartmentService.php
+            └── DepartmentPositionService.php
 ```
 
-## Feature Organization
+## Laravel Locations
 
-Group related Controllers, Requests, Resources, and Services by feature.
+* **Models** → `app/Models`
+* **Policies** → `app/Policies`
+* **Controllers** → `app/Http/Controllers/{Feature}`
+* **Requests** → `app/Http/Requests/{Feature}`
+* **Resources** → `app/Http/Resources/{Feature}`
+* **Services** → `app/Services/{Feature}`
 
-Example:
+## Policies
 
-```text
-Controllers/Leave/
-Requests/Leave/
-Resources/Leave/
-Services/Leave/
-```
+Policies stay in Laravel's standard
 
-Keep Models in `app/Models` and Policies in `app/Policies` unless the existing project uses another convention.
+## Important
 
-## Responsibilities
+The project is **Hybrid Feature-Based**, not DDD.
 
-* **Routes** → routing and middleware.
-* **Controllers** → request orchestration; keep thin.
-* **Form Requests** → validation and request authorization.
-* **Policies** → authorization.
-* **Services** → business logic.
-* **Models** → data, relationships, and Eloquent behavior.
-* **Resources** → API response transformation.
-
-## Rules
-
-* Use only the layers that are necessary.
-* Do not create unnecessary Services, Repositories, DTOs, Interfaces, or other abstractions.
-* Follow existing project patterns before creating new structures.
-* Keep feature-specific logic within its feature.
-* Do not duplicate business logic.
-* Do not refactor unrelated code.
-* Prefer simple, readable Laravel code over over-engineering.
-
-## Request Flow
-
-Follow this architecture for API endpoints:
-
-API Route
-↓
-Controller
-↓
-Form Request
-↓
-Policy (when authorization is required)
-↓
-Service (when business logic is complex, reusabl    e, or should not live in the controller)
-↓
-Model / Repository / Database
-↓
-Controller
-↓
-API Resource (when the endpoint returns an API representation)
-↓
-Response
+When adding new code, follow the existing feature structure and Laravel conventions. Do not introduce unnecessary architectural layers or abstractions.
