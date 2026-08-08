@@ -378,6 +378,27 @@ return new class extends Migration
     }
 };
 ```
+## Request Flow
+
+Follow this architecture for API endpoints:
+
+API Route
+↓
+Controller
+↓
+Form Request
+↓
+Policy (when authorization is required)
+↓
+Service (when business logic is complex, reusable, or should not live in the controller)
+↓
+Model / Repository / Database
+↓
+Controller
+↓
+API Resource (when the endpoint returns an API representation)
+↓
+Response
 
 ## AI Code Generation Rules
 
