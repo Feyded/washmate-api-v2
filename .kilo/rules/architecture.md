@@ -59,14 +59,22 @@ Route::middleware('auth:sanctum')->group(function () {
 
 ## Controllers
 
-Controllers must remain thin
+Controllers must remain thin and should only orchestrate the request flow.
 
-Rules:
+Responsibilities:
 
-- Receive requests
-- Validate requests
-- Call services
-- Return API responses
+- Receive the request.
+- Receive validated data from Form Requests.
+- Perform authorization when appropriate.
+- Call the appropriate Service when business logic requires it.
+- Return the appropriate API Resource or HTTP response.
+
+Do not:
+
+- Validate request data directly in controllers.
+- Implement business logic in controllers.
+- Perform complex database operations directly in controllers.
+- Duplicate logic that belongs in a Service.
 
 Ex.
 
@@ -82,14 +90,14 @@ public function update(UpdateCompanyRequest $request, Company $company)
 	}
 ```
 
-## Form Request
+## Form Requests
 
-Always use a Form Request for validation when request body containes three or more fields.
+Use Form Requests for endpoints that accept user input requiring validation,
+authorization, or non-trivial validation rules.
 
-Rules:
+Prefer Form Requests over inline validation in controllers.
 
-- Validate only the request
-- Return human readable messages on error
+Do not create a Form Request solely to satisfy an arbitrary field-count rule.
 
 Ex.
 
@@ -174,8 +182,31 @@ Do not place business logic inside controllers and use route binding always.
 
 ## Services
 
-Handles all the business logic and return the data to controller
-Service methods should use action-based naming
+Services contain business/application logic that is complex, reusable,
+transactional, or should not live in a Controller or Model.
+
+Use a Service when:
+
+- An operation contains multiple business rules.
+- An operation touches multiple models.
+- A transaction is required.
+- Logic is reused by multiple entry points.
+- The operation represents a meaningful business action.
+- Keeping the logic in the Controller would make it difficult to maintain.
+
+Do not create a Service merely to wrap a simple Eloquent operation.
+
+Service methods should use action-based names such as:
+
+- create()
+- update()
+- delete()
+- approve()
+- reject()
+- assign()
+- calculate()
+- generate()
+- import()
 
 Ex.
 
@@ -229,7 +260,19 @@ Use singular names for services.
 
 ## Resources
 
-Always use resource especially when the api is public to hide essential data.
+## API Resources
+
+Use API Resources when returning models or structured data from API endpoints,
+especially for public APIs and responses that are consumed by frontend or
+external clients.
+
+Resources must explicitly define the fields exposed by the API.
+
+Do not return Eloquent models directly when doing so could expose internal,
+sensitive, or implementation-specific fields.
+
+Use different Resources when different consumers require different response
+structures.
 
 Ex.
 
@@ -261,8 +304,21 @@ class UserDetectionResource extends JsonResource
 
 ## Policies
 
-Use policy especially when the route is only for authenticated user
+Use Policies for authorization decisions involving models or resources.
 
+Authentication should be handled by Laravel Sanctum and route middleware.
+
+Use Policies when access depends on:
+
+- The authenticated user's identity.
+- Ownership of a resource.
+- User roles or permissions.
+- The state of the resource.
+- Relationships between the user and resource.
+
+Do not use Policies merely because a route requires authentication.
+
+Use `auth:sanctum` for authentication and Policies for authorization.
 ```php
 <?php
 
@@ -283,6 +339,20 @@ class OvertimePolicy
 }
 
 ```
+## Repositories
+
+Do not introduce Repository classes by default.
+
+Use Eloquent models and query scopes for normal database operations.
+
+Introduce a Repository only when there is a clear architectural requirement,
+such as:
+
+- Multiple data sources.
+- Complex persistence abstraction.
+- A repository is already established by the existing project pattern.
+
+Do not create repositories merely to wrap Eloquent methods.
 
 ## Models
 
@@ -378,6 +448,58 @@ return new class extends Migration
     }
 };
 ```
+## API Responses
+
+Use a consistent JSON response structure.
+
+Successful single-resource response:
+```json
+{
+    "data": {...}
+}
+```
+
+Successful collection response:
+```json
+{
+    "data": [...]
+}
+```
+
+Successful operation with a message:
+
+```json
+{
+    "message": "Company updated successfully.",
+    "data": {...}
+}
+```
+
+Do not expose internal exception messages in production responses.
+
+Use appropriate HTTP status codes:
+
+- 200 for successful retrieval/update.
+- 201 for successful creation.
+- 204 for successful deletion when no response body is required.
+- 401 for unauthenticated requests.
+- 403 for unauthorized requests.
+- 404 for resources that do not exist.
+- 422 for validation failures.
+
+## Database and Eloquent
+
+- Prefer Eloquent over raw SQL for normal CRUD operations.
+- Use query scopes for reusable query constraints.
+- Use eager loading to prevent N+1 queries.
+- Do not access relationships repeatedly inside loops when eager loading is possible.
+- Use `select()` when retrieving large datasets and only a subset of columns is required.
+- Use pagination for potentially large collections.
+- Use database transactions for operations that modify multiple related records.
+- Do not place database queries in API Resources.
+- Avoid unnecessary queries inside loops.
+
+
 ## Request Flow
 
 Follow this architecture for API endpoints:
@@ -390,7 +512,7 @@ Form Request
 ↓
 Policy (when authorization is required)
 ↓
-Service (when business logic is complex, reusable, or should not live in the controller)
+Service (when business logic is complex, reusabl    e, or should not live in the controller)
 ↓
 Model / Repository / Database
 ↓
@@ -399,14 +521,3 @@ Controller
 API Resource (when the endpoint returns an API representation)
 ↓
 Response
-
-## AI Code Generation Rules
-
-- Follow Laravel 10 conventions.
-- Use Form Requests.
-- Use API Resources.
-- Use Services.
-- Use Policies.
-- Use Dependency Injection.
-- Use Transactions where needed.
-- Generate production-ready code only.
