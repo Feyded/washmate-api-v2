@@ -4,8 +4,8 @@
 
 This project is built using:
 
-- Laravel 10.10
-- PHP 8.1+
+- Laravel 13.24.0
+- PHP 8.3.24+
 - Laravel Sanctum (Authentication)
 - Spatie Laravel Permission (Roles & Permissions)
 - Laravel Socialite (OAuth Authentication)
