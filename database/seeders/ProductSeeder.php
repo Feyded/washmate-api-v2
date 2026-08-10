@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Category;
 use App\Models\Product;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class ProductSeeder extends Seeder
@@ -12,26 +11,41 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $products = [
-            ['category_id' => 'Detergent', 'name' => 'Tide Liquid Detergent', 'description' => 'Deep cleaning liquid detergent.', 'price' => 210.00],
-            ['category_id' => 'Detergent', 'name' => 'Surf Powder Detergent', 'description' => 'Brightens and removes tough stains.', 'price' => 128.00],
-            ['category_id' => 'Detergent', 'name' => 'Champion Detergent Powder', 'description' => 'Value-sized detergent for everyday laundry.', 'price' => 95.00],
-            ['category_id' => 'Fabric Conditioner', 'name' => 'Downy Fabric Conditioner', 'description' => 'Leaves clothes soft and smelling fresh.', 'price' => 120.00],
-            ['category_id' => 'Fabric Conditioner', 'name' => 'Bounce Fabric Conditioner', 'description' => 'Reduces static and adds long-lasting fragrance.', 'price' => 115.00],
-            ['category_id' => 'Fabric Conditioner', 'name' => 'Snuggle Fabric Conditioner', 'description' => 'Softens fabrics and keeps them wrinkle-free.', 'price' => 110.00],
-            ['category_id' => 'Bleach', 'name' => 'Zonrox Liquid Bleach', 'description' => 'Whitens and disinfects fabrics.', 'price' => 55.00],
-            ['category_id' => 'Bleach', 'name' => 'Clorox Bleach', 'description' => 'Removes stains and kills germs on laundry.', 'price' => 65.00],
-            ['category_id' => 'Stain Remover', 'name' => 'Vanish Stain Remover', 'description' => 'Powerful formula for tough stains.', 'price' => 95.00],
-            ['category_id' => 'Stain Remover', 'name' => 'Shout Stain Remover', 'description' => 'Removes stains before washing.', 'price' => 85.00],
-            ['category_id' => 'Fabric Whitener', 'name' => 'Mr. Clean Fabric Whitener', 'description' => 'Restores whiteness to white fabrics.', 'price' => 78.00],
-            ['category_id' => 'Fabric Freshener', 'name' => 'Downy Fabric Freshener', 'description' => 'Keeps clothes smelling fresh between washes.', 'price' => 76.00],
-            ['category_id' => 'Lint Remover', 'name' => 'Scotch-Brite Lint Roller', 'description' => 'Removes lint, hair, and fuzz from clothes.', 'price' => 45.00],
-            ['category_id' => 'Dish Soap', 'name' => 'Joy Dish Soap', 'description' => 'Gentle on hands, tough on grease.', 'price' => 48.00],
-            ['category_id' => 'Hand Sanitizer', 'name' => 'Alcohol Hand Sanitizer', 'description' => '70% ethyl alcohol for effective sanitization.', 'price' => 35.00],
-            ['category_id' => 'Air Freshener', 'name' => 'Glade Air Freshener', 'description' => 'Eliminates odors and refreshes the air.', 'price' => 62.00],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Ariel Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Ariel Power Gel Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Tide Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Tide Power Pods Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Champion Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Surf Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Surf Antibac Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Breeze Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Breeze Antibac Sachet'],
+            ['category_name' => 'Liquid Detergent', 'name' => 'Pride Sachet'],
+
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Downy Sunrise Fresh Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Downy Passion Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Downy Antibac Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Downy Kontra Kulob Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Downy Garden Bloom Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Surf Fabcon Blossom Fresh Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Surf Fabcon Antibac Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Champion  Blue Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Champion  Pink Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Del  Blue Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Del  Pink Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'Del  Purple Sachet'],
+            ['category_name' => 'Fabric Conditioner', 'name' => 'White Dove  Sachet'],
+
+            ['category_name' => 'Bleach', 'name' => 'Zonrox Original'],
+            ['category_name' => 'Bleach', 'name' => 'Zonrox ColorSafe'],
+            ['category_name' => 'Bleach', 'name' => 'Clorox Regular'],
+            ['category_name' => 'Bleach', 'name' => 'Clorox ColorSafe'],
+            ['category_name' => 'Bleach', 'name' => 'Champion Bleach'],
+            ['category_name' => 'Bleach', 'name' => 'Generic Liquid Bleach'],
         ];
 
         foreach ($products as $product) {
-            $category = Category::firstOrCreate(['name' => $product['category']]);
+            $category = Category::firstOrCreate(['name' => $product['category_name']]);
 
             Product::firstOrCreate(
                 [
