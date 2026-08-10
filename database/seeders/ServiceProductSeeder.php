@@ -4,7 +4,6 @@ namespace Database\Seeders;
 
 use App\Models\Product;
 use App\Models\Service;
-use App\Models\Brand;
 use App\Models\ServiceProduct;
 use Illuminate\Database\Seeder;
 
