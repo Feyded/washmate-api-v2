@@ -6,5 +6,19 @@ use Illuminate\Database\Eloquent\Model;
 
 class ServiceProduct extends Model
 {
-    //
+    protected $fillable = [
+        'service_id',
+        'product_id',
+        'quantity',
+    ];
+
+    public function service()
+    {
+        return $this->belongsTo(Service::class);
+    }
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
 }
