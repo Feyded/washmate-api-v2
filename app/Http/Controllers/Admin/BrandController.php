@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreBrandFormRequest;
+use App\Http\Requests\Admin\UpdateBrandFormRequest;
 use App\Models\Brand;
-use Illuminate\Http\Request;
 
 class BrandController extends Controller
 {
@@ -15,9 +16,9 @@ class BrandController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreBrandFormRequest $request)
     {
-        $data = Brand::create($request->all());
+        $data = Brand::create($request->validated());
 
         return response()->json([
             'message' => 'Brand Created Successfully',
@@ -32,9 +33,9 @@ class BrandController extends Controller
         ]);
     }
 
-    public function update(Request $request, Brand $brand)
+    public function update(UpdateBrandFormRequest $request, Brand $brand)
     {
-        $brand->update($request->all());
+        $brand->update($request->validated());
 
         return response()->json([
             'message' => 'Brand Updated Successfully',

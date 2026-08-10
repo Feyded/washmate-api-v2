@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreServiceProductFormRequest;
+use App\Http\Requests\Admin\UpdateServiceProductFormRequest;
 use App\Models\ServiceProduct;
-use Illuminate\Http\Request;
 
 class ServiceProductController extends Controller
 {
@@ -15,9 +16,9 @@ class ServiceProductController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceProductFormRequest $request)
     {
-        $data = ServiceProduct::create($request->all());
+        $data = ServiceProduct::create($request->validated());
 
         return response()->json([
             'message' => 'Service Product Created Successfully',
@@ -32,9 +33,9 @@ class ServiceProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, ServiceProduct $serviceProduct)
+    public function update(UpdateServiceProductFormRequest $request, ServiceProduct $serviceProduct)
     {
-        $serviceProduct->update($request->all());
+        $serviceProduct->update($request->validated());
 
         return response()->json([
             'message' => 'Service Product Updated Successfully',

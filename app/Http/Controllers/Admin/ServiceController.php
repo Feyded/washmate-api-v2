@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreServiceFormRequest;
+use App\Http\Requests\Admin\UpdateServiceFormRequest;
 use App\Models\Service;
-use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
@@ -15,9 +16,9 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceFormRequest $request)
     {
-        $data = Service::create($request->all());
+        $data = Service::create($request->validated());
 
         return response()->json([
             'message' => 'Service Created Successfully',
@@ -32,9 +33,9 @@ class ServiceController extends Controller
         ]);
     }
 
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceFormRequest $request, Service $service)
     {
-        $service->update($request->all());
+        $service->update($request->validated());
 
         return response()->json([
             'message' => 'Service Updated Successfully',

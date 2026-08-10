@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\CreateProductFormRequest;
+use App\Http\Requests\Admin\StoreProductFormRequest;
+use App\Http\Requests\Admin\UpdateProductFormRequest;
 use App\Models\Product;
-use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -16,7 +16,7 @@ class ProductController extends Controller
         ]);
     }
 
-    public function store(CreateProductFormRequest $request)
+    public function store(StoreProductFormRequest $request)
     {
         $data = Product::create($request->validated());
 
@@ -33,9 +33,9 @@ class ProductController extends Controller
         ]);
     }
 
-    public function update(Request $request, Product $product)
+    public function update(UpdateProductFormRequest $request, Product $product)
     {
-        $product->update($request->all());
+        $product->update($request->validated());
 
         return response()->json([
             'message' => 'Product Updated Successfully',

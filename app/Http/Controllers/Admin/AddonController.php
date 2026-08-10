@@ -3,8 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\StoreAddonFormRequest;
+use App\Http\Requests\Admin\UpdateAddonFormRequest;
 use App\Models\addon;
-use Illuminate\Http\Request;
 
 class AddonController extends Controller
 {
@@ -15,9 +16,9 @@ class AddonController extends Controller
         ]);
     }
 
-    public function store(Request $request)
+    public function store(StoreAddonFormRequest $request)
     {
-        $data = addon::create($request->all());
+        $data = addon::create($request->validated());
 
         return response()->json([
             'message' => 'Addon Created Successfully',
@@ -32,9 +33,9 @@ class AddonController extends Controller
         ]);
     }
 
-    public function update(Request $request, addon $addon)
+    public function update(UpdateAddonFormRequest $request, addon $addon)
     {
-        $addon->update($request->all());
+        $addon->update($request->validated());
 
         return response()->json([
             'message' => 'Addon Updated Successfully',
