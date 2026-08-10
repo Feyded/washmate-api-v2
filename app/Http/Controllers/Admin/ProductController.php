@@ -11,7 +11,9 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return Product::all();
+        return response()->json([
+            'data' => Product::all(),
+        ]);
     }
 
     public function store(CreateProductFormRequest $request)
@@ -21,18 +23,23 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Product Created Successfully',
             'data' => $data,
-        ]);
+        ], 201);
     }
 
     public function show(Product $product)
     {
-        return $product;
+        return response()->json([
+            'data' => $product,
+        ]);
     }
 
     public function update(Request $request, Product $product)
     {
         $product->update($request->all());
 
-        return $product;
+        return response()->json([
+            'message' => 'Product Updated Successfully',
+            'data' => $product,
+        ]);
     }
 }

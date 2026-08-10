@@ -10,23 +10,35 @@ class AddonController extends Controller
 {
     public function index()
     {
-        return addon::all();
+        return response()->json([
+            'data' => addon::all(),
+        ]);
     }
 
     public function store(Request $request)
     {
-        return addon::create($request->all());
+        $data = addon::create($request->all());
+
+        return response()->json([
+            'message' => 'Addon Created Successfully',
+            'data' => $data,
+        ], 201);
     }
 
     public function show(addon $addon)
     {
-        return $addon;
+        return response()->json([
+            'data' => $addon,
+        ]);
     }
 
     public function update(Request $request, addon $addon)
     {
         $addon->update($request->all());
 
-        return $addon;
+        return response()->json([
+            'message' => 'Addon Updated Successfully',
+            'data' => $addon,
+        ]);
     }
 }
