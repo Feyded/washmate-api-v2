@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('brand_id')->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->decimal('price', 8, 2);
+            $table->boolean('is_active')->default(true);
             $table->unique(['category_id', 'brand_id', 'name']);
             $table->timestamps();
         });
