@@ -110,8 +110,8 @@ class ServiceProductSeeder extends Seeder
         ];
 
         foreach ($serviceProducts as $item) {
-            $service = Service::where('name', $item['service_name'])->first();
-            $product = Product::where('name', $item['product_name'])->first();
+            $service = Service::firstOrCreate(['name' => $item['service_name']]);
+            $product = Product::firstOrCreate(['name' => $item['product_name']]);
 
             if ($service && $product) {
                 ServiceProduct::firstOrCreate([
