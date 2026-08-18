@@ -16,16 +16,6 @@ class CategorySeeder extends Seeder
             'Liquid Detergent',
             'Fabric Conditioner',
             'Bleach',
-            'Stain Remover',
-            'Fabric Whitener',
-            'Ironing Aid',
-            'Fabric Freshener',
-            'Lint Remover',
-            'Oven Cleaner',
-            'Surface Cleaner',
-            'Dish Soap',
-            'Hand Sanitizer',
-            'Air Freshener',
         ];
 
         foreach ($categories as $category) {
