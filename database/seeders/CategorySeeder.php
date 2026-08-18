@@ -15,7 +15,6 @@ class CategorySeeder extends Seeder
         $categories = [
             'Liquid Detergent',
             'Fabric Conditioner',
-            'Bleach',
         ];
 
         foreach ($categories as $category) {
