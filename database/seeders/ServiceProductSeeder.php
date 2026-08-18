@@ -17,39 +17,39 @@ class ServiceProductSeeder extends Seeder
         $serviceProducts = [
             [
                 'service_name' => 'Wash Only',
-                'product_name' => 'Sachet',
                 'brand_name' => 'Ariel',
+                'product_name' => 'Sunrise Fresh 58mL',
                 'quantity' => 1,
             ],
             [
                 'service_name' => 'Wash & Dry',
-                'product_name' => 'Sachet',
                 'brand_name' => 'Ariel',
+                'product_name' => 'Sunrise Fresh 58mL',
                 'quantity' => 1,
             ],
             [
                 'service_name' => 'Wash & Dry',
-                'product_name' => 'Passion Sachet',
                 'brand_name' => 'Downy',
+                'product_name' => 'Sunrise Fresh 20mL',
                 'quantity' => 1,
             ],
             [
                 'service_name' => 'Wash, Dry & Fold',
-                'product_name' => 'Sachet',
                 'brand_name' => 'Ariel',
+                'product_name' => 'Sunrise Fresh 58mL',
                 'quantity' => 1,
             ],
             [
                 'service_name' => 'Wash, Dry & Fold',
-                'product_name' => 'Passion Sachet',
                 'brand_name' => 'Downy',
+                'product_name' => 'Sunrise Fresh 20mL',
                 'quantity' => 1,
             ],
         ];
 
         foreach ($serviceProducts as $item) {
-            $service = Service::firstOrCreate(['name', $item['service_name']])->first();
-            $product = Product::firstOrCreate(['name', $item['product_name']])
+            $service = Service::firstOrCreate(['name' => $item['service_name']])->first();
+            $product = Product::firstOrCreate(['name' => $item['product_name']])
                 ->whereHas('brand', function ($query) use ($item) {
                     $query->where('name', $item['brand_name']);
                 })
