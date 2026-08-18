@@ -18,10 +18,6 @@ class BrandSeeder extends Seeder
             'Pride',
             'Downy',
             'Del',
-            'White Dove',
-            'Zonrox',
-            'Clorox',
-            'Generic',
         ];
 
         foreach ($brands as $brand) {
