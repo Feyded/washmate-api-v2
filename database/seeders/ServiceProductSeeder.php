@@ -48,8 +48,8 @@ class ServiceProductSeeder extends Seeder
         ];
 
         foreach ($serviceProducts as $item) {
-            $service = Service::where('name', $item['service_name'])->first();
-            $product = Product::where('name', $item['product_name'])
+            $service = Service::firstOrCreate(['name', $item['service_name']])->first();
+            $product = Product::firstOrCreate(['name', $item['product_name']])
                 ->whereHas('brand', function ($query) use ($item) {
                     $query->where('name', $item['brand_name']);
                 })
