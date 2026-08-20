@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_item_addons', function (Blueprint $table) {
+        Schema::create('order_item_products', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_item_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->string('product_name');
-            $table->decimal('unit_price', 10, 2);
-            $table->decimal('quantity', 10, 2);
-            $table->decimal('subtotal', 10, 2);
+            $table->string('quantity');
+            $table->string('unit_price');
+            $table->enum('type', ['preset', 'addon'])->default('preset');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_item_addons');
+        Schema::dropIfExists('order_item_products');
     }
 };

@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class OrderItemAddon extends Model
+class OrderItemProduct extends Model
 {
     //
 }
