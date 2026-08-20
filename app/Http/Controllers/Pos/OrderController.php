@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Pos;
 
-use Illuminate\Http\Request;
+use App\Http\Requests\Pos\StoreOrderFormRequest;
 use App\Http\Controllers\Controller;
 
 class OrderController extends Controller
 {
-    public function store(Request $request)
+    public function store(StoreOrderFormRequest $request)
     {
-        //
+        $validated = $request->validated();
     }
 }
