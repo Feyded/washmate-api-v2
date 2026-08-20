@@ -3,15 +3,14 @@
 namespace App\Services\Pos;
 
 use App\Models\Order;
-use App\Models\Product;
+use App\Models\User;
 use App\Models\Service;
-use App\Models\InventoryTransaction;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\ValidationException;
 
 class OrderService
 {
-    public function create(array $data, $user): Order
+    public function create(array $data, User $user): Order
     {
         return DB::transaction(function () use ($data, $user) {
 
