@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('service_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->decimal('quantity')->default(1);
+            $table->unique(['service_id', 'product_id']);
             $table->timestamps();
         });
     }
