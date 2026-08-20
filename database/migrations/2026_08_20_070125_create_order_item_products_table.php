@@ -16,8 +16,9 @@ return new class extends Migration
             $table->foreignId('order_item_id')->constrained()->cascadeOnDelete();
             $table->foreignId('product_id')->constrained()->cascadeOnDelete();
             $table->string('product_name');
-            $table->string('quantity');
-            $table->string('unit_price');
+            $table->decimal('quantity');
+            $table->decimal('unit_price');
+            $table->decimal('subtotal', 10, 2);
             $table->enum('type', ['preset', 'addon'])->default('preset');
             $table->timestamps();
         });
