@@ -19,11 +19,15 @@ class OrderService
             $orderSubtotal = 0;
 
             $order = Order::create([
-                'order_number' => $this->generateOrderNumber(),
+                'order_number' => null,
                 'subtotal' => 0,
                 'total' => 0,
                 'status' => 'pending',
                 'created_by' => $user->id,
+            ]);
+
+            $order->update([
+                'order_number' => $this->generateOrderNumber($order),
             ]);
 
             foreach ($data['items'] as $item) {
@@ -81,8 +85,12 @@ class OrderService
         // Product processing goes here.
     }
 
-    private function generateOrderNumber(): string
+    private function generateOrderNumber(Order $order): string
     {
-        return 'ORD-' . now()->format('YmdHis') . '-' . random_int(1000, 9999);
+        return sprintf(
+            'ORD-%s-%06d',
+            $order->created_at->format('Ymd'),
+            $order->id
+        );
     }
 }
