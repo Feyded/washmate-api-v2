@@ -7,13 +7,14 @@ use App\Http\Requests\Pos\StoreOrderFormRequest;
 use App\Http\Controllers\Controller;
 use App\Services\Pos\OrderService;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\JsonResponse;
 
 class OrderController extends Controller
 {
 
     public function __construct(private OrderService $orderService) {}
 
-    public function store(StoreOrderFormRequest $request)
+    public function store(StoreOrderFormRequest $request): JsonResponse
     {
         $validated = $request->validated();
         $user = Auth::user();
@@ -23,6 +24,6 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'Order created successfully.',
             'data' => $order
-        ]);
+        ], 201);
     }
 }
