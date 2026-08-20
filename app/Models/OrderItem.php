@@ -17,6 +17,11 @@ class OrderItem extends Model
         'subtotal',
     ];
 
+    public function order(): BelongsTo
+    {
+        return $this->belongsTo(Order::class);
+    }
+
     public function service(): BelongsTo
     {
         return $this->belongsTo(Service::class);
