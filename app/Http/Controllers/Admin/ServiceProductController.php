@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreServiceProductFormRequest;
-use App\Http\Requests\Admin\UpdateServiceProductFormRequest;
+use App\Http\Requests\Admin\StoreServiceProductRequest;
+use App\Http\Requests\Admin\UpdateServiceProductRequest;
 use App\Models\ServiceProduct;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class ServiceProductController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function store(StoreServiceProductFormRequest $request): JsonResponse
+    public function store(StoreServiceProductRequest $request): JsonResponse
     {
         $data = ServiceProduct::create($request->validated());
 
@@ -37,7 +37,7 @@ class ServiceProductController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function update(UpdateServiceProductFormRequest $request, ServiceProduct $serviceProduct): JsonResponse
+    public function update(UpdateServiceProductRequest $request, ServiceProduct $serviceProduct): JsonResponse
     {
         $serviceProduct->update($request->validated());
 

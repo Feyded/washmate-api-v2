@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreBrandFormRequest;
-use App\Http\Requests\Admin\UpdateBrandFormRequest;
+use App\Http\Requests\Admin\StoreBrandRequest;
+use App\Http\Requests\Admin\UpdateBrandRequest;
 use App\Models\Brand;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class BrandController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function store(StoreBrandFormRequest $request): JsonResponse
+    public function store(StoreBrandRequest $request): JsonResponse
     {
         $data = Brand::create($request->validated());
 
@@ -37,7 +37,7 @@ class BrandController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function update(UpdateBrandFormRequest $request, Brand $brand): JsonResponse
+    public function update(UpdateBrandRequest $request, Brand $brand): JsonResponse
     {
         $brand->update($request->validated());
 

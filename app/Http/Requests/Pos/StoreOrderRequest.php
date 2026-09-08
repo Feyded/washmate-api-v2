@@ -5,7 +5,7 @@ namespace App\Http\Requests\Pos;
 use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreOrderFormRequest extends FormRequest
+class StoreOrderRequest extends FormRequest
 {
     public function authorize(): bool
     {

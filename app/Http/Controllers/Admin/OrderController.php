@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreOrderFormRequest;
+use App\Http\Requests\Admin\StoreOrderRequest;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class OrderController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function store(StoreOrderFormRequest $request): JsonResponse
+    public function store(StoreOrderRequest $request): JsonResponse
     {
         $data = Order::create($request->validated());
 

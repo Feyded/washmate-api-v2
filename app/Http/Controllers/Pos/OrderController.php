@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Pos;
 
 
-use App\Http\Requests\Pos\StoreOrderFormRequest;
+use App\Http\Requests\Pos\StoreOrderRequest;
 use App\Http\Controllers\Controller;
 use App\Services\Pos\OrderService;
 use Illuminate\Support\Facades\Auth;
@@ -15,7 +15,7 @@ class OrderController extends Controller
 
     public function __construct(private OrderService $orderService) {}
 
-    public function store(StoreOrderFormRequest $request): JsonResponse
+    public function store(StoreOrderRequest $request): JsonResponse
     {
         $validated = $request->validated();
         $user = Auth::user();

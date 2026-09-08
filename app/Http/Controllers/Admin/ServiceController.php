@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\StoreServiceFormRequest;
-use App\Http\Requests\Admin\UpdateServiceFormRequest;
+use App\Http\Requests\Admin\StoreServiceRequest;
+use App\Http\Requests\Admin\UpdateServiceRequest;
 use App\Models\Service;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,7 +19,7 @@ class ServiceController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function store(StoreServiceFormRequest $request): JsonResponse
+    public function store(StoreServiceRequest $request): JsonResponse
     {
         $data = Service::create($request->validated());
 
@@ -37,7 +37,7 @@ class ServiceController extends Controller
         ], Response::HTTP_OK);
     }
 
-    public function update(UpdateServiceFormRequest $request, Service $service): JsonResponse
+    public function update(UpdateServiceRequest $request, Service $service): JsonResponse
     {
         $service->update($request->validated());
 
