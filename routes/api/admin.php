@@ -4,12 +4,14 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServiceProductController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['throttle:api', 'auth:sanctum', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+        Route::apiResource('users', UserController::class)->except('destroy');
         Route::apiResource('brands', BrandController::class)->except('destroy');
         Route::apiResource('products', ProductController::class)->except('destroy');
         Route::apiResource('services', ServiceController::class)->except('destroy');
