@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 class OrderController extends Controller
 {
 
-    public function __construct(private OrderService $orderService) {}
+    public function __construct(private readonly OrderService $orderService) {}
 
     public function store(StoreOrderRequest $request): JsonResponse
     {
