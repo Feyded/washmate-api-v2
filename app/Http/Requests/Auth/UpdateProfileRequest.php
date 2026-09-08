@@ -28,12 +28,6 @@ class UpdateProfileRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:100'],
             'middle_name' => ['nullable', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
-            'mobile_number' => [
-                'nullable',
-                'digits:10',
-                'regex:/^9[0-9]{9}$/',
-                Rule::unique('users', 'mobile_number')->ignore($this->user()->id),
-            ],
         ];
     }
 }
