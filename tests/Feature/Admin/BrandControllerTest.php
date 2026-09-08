@@ -4,7 +4,6 @@ namespace Tests\Feature\Admin;
 
 use App\Models\Brand;
 use App\Models\User;
-use Database\Factories\BrandFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
