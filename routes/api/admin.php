@@ -6,7 +6,8 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServiceProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('admin')
+Route::middleware(['throttle:api'])
+    ->prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::apiResource('brands', BrandController::class)->except('destroy');
