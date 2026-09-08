@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\Admin\AddonController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ServiceController;
@@ -11,7 +10,6 @@ Route::prefix('admin')
     ->name('admin.')
     ->group(function () {
         Route::apiResource('brands', BrandController::class)->except('destroy');
-        Route::apiResource('addons', AddonController::class)->except('destroy');
         Route::apiResource('products', ProductController::class)->except('destroy');
         Route::apiResource('services', ServiceController::class)->except('destroy');
         Route::apiResource('service-products', ServiceProductController::class)->except('destroy');
