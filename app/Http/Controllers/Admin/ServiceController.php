@@ -6,17 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreServiceFormRequest;
 use App\Http\Requests\Admin\UpdateServiceFormRequest;
 use App\Models\Service;
+use Illuminate\Http\JsonResponse;
 
 class ServiceController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json([
             'data' => Service::all(),
         ]);
     }
 
-    public function store(StoreServiceFormRequest $request)
+    public function store(StoreServiceFormRequest $request): JsonResponse
     {
         $data = Service::create($request->validated());
 
@@ -26,14 +27,14 @@ class ServiceController extends Controller
         ], 201);
     }
 
-    public function show(Service $service)
+    public function show(Service $service): JsonResponse
     {
         return response()->json([
             'data' => $service,
         ]);
     }
 
-    public function update(UpdateServiceFormRequest $request, Service $service)
+    public function update(UpdateServiceFormRequest $request, Service $service): JsonResponse
     {
         $service->update($request->validated());
 

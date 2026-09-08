@@ -6,17 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreBrandFormRequest;
 use App\Http\Requests\Admin\UpdateBrandFormRequest;
 use App\Models\Brand;
+use Illuminate\Http\JsonResponse;
 
 class BrandController extends Controller
 {
-    public function index()
+    public function index(): JsonResponse
     {
         return response()->json([
             'data' => Brand::all(),
         ]);
     }
 
-    public function store(StoreBrandFormRequest $request)
+    public function store(StoreBrandFormRequest $request): JsonResponse
     {
         $data = Brand::create($request->validated());
 
@@ -26,14 +27,14 @@ class BrandController extends Controller
         ], 201);
     }
 
-    public function show(Brand $brand)
+    public function show(Brand $brand): JsonResponse
     {
         return response()->json([
             'data' => $brand,
         ]);
     }
 
-    public function update(UpdateBrandFormRequest $request, Brand $brand)
+    public function update(UpdateBrandFormRequest $request, Brand $brand): JsonResponse
     {
         $brand->update($request->validated());
 

@@ -10,9 +10,8 @@ class ServiceSeeder extends Seeder
     public function run(): void
     {
         $services = [
-            ['name' => 'Wash Only', 'price' => 65.00],
-            ['name' => 'Dry Only', 'price' => 65.00],
-            ['name' => 'Wash & Dry', 'price' => 130.00],
+            ['name' => 'Wash Only', 'price' => 70.00],
+            ['name' => 'Wash & Dry', 'price' => 160.00],
             ['name' => 'Wash, Dry & Fold', 'price' => 195.00],
         ];
 
