@@ -6,7 +6,7 @@ use App\Http\Controllers\Admin\ServiceController;
 use App\Http\Controllers\Admin\ServiceProductController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['throttle:api', 'auth:sanctum', 'role:user'])
+Route::middleware(['throttle:api', 'auth:sanctum', 'role:admin'])
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {

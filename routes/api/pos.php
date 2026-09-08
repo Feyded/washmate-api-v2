@@ -4,7 +4,7 @@ use App\Http\Controllers\Pos\OrderController;
 
 use Illuminate\Support\Facades\Route;
 
-Route::middleware(['throttle:api'])
+Route::middleware(['throttle:api', 'auth:sanctum', 'role:admin'])
     ->prefix('pos')
     ->name('pos.')
     ->group(function () {
