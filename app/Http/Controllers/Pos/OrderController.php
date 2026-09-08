@@ -6,7 +6,6 @@ namespace App\Http\Controllers\Pos;
 use App\Http\Requests\Pos\StoreOrderRequest;
 use App\Http\Controllers\Controller;
 use App\Services\Pos\OrderService;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -18,7 +17,7 @@ class OrderController extends Controller
     public function store(StoreOrderRequest $request): JsonResponse
     {
         $validated = $request->validated();
-        $user = Auth::user();
+        $user = $request->user();
 
         $order = $this->orderService->create($validated, $user);
 
