@@ -7,14 +7,16 @@ use App\Http\Requests\Admin\StoreBrandFormRequest;
 use App\Http\Requests\Admin\UpdateBrandFormRequest;
 use App\Models\Brand;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class BrandController extends Controller
 {
     public function index(): JsonResponse
     {
         return response()->json([
+            'message' => 'Brands retrieved successfully.',
             'data' => Brand::all(),
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function store(StoreBrandFormRequest $request): JsonResponse
@@ -22,16 +24,17 @@ class BrandController extends Controller
         $data = Brand::create($request->validated());
 
         return response()->json([
-            'message' => 'Brand Created Successfully',
+            'message' => 'Brand created successfully.',
             'data' => $data,
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     public function show(Brand $brand): JsonResponse
     {
         return response()->json([
+            'message' => 'Brand retrieved successfully.',
             'data' => $brand,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function update(UpdateBrandFormRequest $request, Brand $brand): JsonResponse
@@ -39,8 +42,8 @@ class BrandController extends Controller
         $brand->update($request->validated());
 
         return response()->json([
-            'message' => 'Brand Updated Successfully',
+            'message' => 'Brand updated successfully.',
             'data' => $brand,
-        ]);
+        ], Response::HTTP_OK);
     }
 }

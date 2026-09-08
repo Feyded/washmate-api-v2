@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Services\Pos\OrderService;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends Controller
 {
@@ -24,6 +25,6 @@ class OrderController extends Controller
         return response()->json([
             'message' => 'Order created successfully.',
             'data' => $order
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 }

@@ -6,14 +6,16 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreOrderFormRequest;
 use App\Models\Order;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class OrderController extends Controller
 {
     public function index(): JsonResponse
     {
         return response()->json([
+            'message' => 'Orders retrieved successfully.',
             'data' => Order::all(),
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function store(StoreOrderFormRequest $request): JsonResponse
@@ -21,8 +23,8 @@ class OrderController extends Controller
         $data = Order::create($request->validated());
 
         return response()->json([
-            'message' => 'Order Created Successfully',
+            'message' => 'Order created successfully.',
             'data' => $data,
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 }

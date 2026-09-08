@@ -7,14 +7,16 @@ use App\Http\Requests\Admin\StoreServiceFormRequest;
 use App\Http\Requests\Admin\UpdateServiceFormRequest;
 use App\Models\Service;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ServiceController extends Controller
 {
     public function index(): JsonResponse
     {
         return response()->json([
+            'message' => 'Services retrieved successfully.',
             'data' => Service::all(),
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function store(StoreServiceFormRequest $request): JsonResponse
@@ -22,16 +24,17 @@ class ServiceController extends Controller
         $data = Service::create($request->validated());
 
         return response()->json([
-            'message' => 'Service Created Successfully',
+            'message' => 'Service created successfully.',
             'data' => $data,
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     public function show(Service $service): JsonResponse
     {
         return response()->json([
+            'message' => 'Service retrieved successfully.',
             'data' => $service,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function update(UpdateServiceFormRequest $request, Service $service): JsonResponse
@@ -39,8 +42,8 @@ class ServiceController extends Controller
         $service->update($request->validated());
 
         return response()->json([
-            'message' => 'Service Updated Successfully',
+            'message' => 'Service updated successfully.',
             'data' => $service,
-        ]);
+        ], Response::HTTP_OK);
     }
 }

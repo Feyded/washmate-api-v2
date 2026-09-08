@@ -7,14 +7,16 @@ use App\Http\Requests\Admin\StoreProductFormRequest;
 use App\Http\Requests\Admin\UpdateProductFormRequest;
 use App\Models\Product;
 use Illuminate\Http\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class ProductController extends Controller
 {
     public function index(): JsonResponse
     {
         return response()->json([
+            'message' => 'Products retrieved successfully.',
             'data' => Product::all(),
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function store(StoreProductFormRequest $request): JsonResponse
@@ -22,16 +24,17 @@ class ProductController extends Controller
         $data = Product::create($request->validated());
 
         return response()->json([
-            'message' => 'Product Created Successfully',
+            'message' => 'Product created successfully.',
             'data' => $data,
-        ], 201);
+        ], Response::HTTP_CREATED);
     }
 
     public function show(Product $product): JsonResponse
     {
         return response()->json([
+            'message' => 'Product retrieved successfully.',
             'data' => $product,
-        ]);
+        ], Response::HTTP_OK);
     }
 
     public function update(UpdateProductFormRequest $request, Product $product): JsonResponse
@@ -39,8 +42,8 @@ class ProductController extends Controller
         $product->update($request->validated());
 
         return response()->json([
-            'message' => 'Product Updated Successfully',
+            'message' => 'Product updated successfully.',
             'data' => $product,
-        ]);
+        ], Response::HTTP_OK);
     }
 }
