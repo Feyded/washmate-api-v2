@@ -6,15 +6,14 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserControllerTest extends TestCase
+class UserTest extends TestCase
 {
     use RefreshDatabase;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->seed(\Database\Seeders\RolePermissionSeeder::class);
+        $this->authenticateAsAdmin();
     }
 
     private function authenticateAdmin(): User

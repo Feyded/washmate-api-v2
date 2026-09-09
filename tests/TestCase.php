@@ -8,6 +8,7 @@ use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
 
 abstract class TestCase extends BaseTestCase
 {
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -21,7 +22,7 @@ abstract class TestCase extends BaseTestCase
 
         $user->assignRole('admin');
 
-        $this->actingAs($user, 'sanctum');
+        $this->actingAs($user);
 
         return $user;
     }

@@ -6,21 +6,17 @@ use App\Models\Product;
 use App\Models\Service;
 use App\Models\ServiceProduct;
 use App\Models\User;
-use Database\Factories\ProductFactory;
-use Database\Factories\ServiceFactory;
-use Database\Factories\ServiceProductFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ServiceProductControllerTest extends TestCase
+class ServiceProductTest extends TestCase
 {
     use RefreshDatabase;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->seed(\Database\Seeders\RolePermissionSeeder::class);
+        $this->authenticateAsAdmin();
     }
 
     private function authenticateAdmin(): User

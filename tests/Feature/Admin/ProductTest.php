@@ -6,21 +6,17 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
-use Database\Factories\BrandFactory;
-use Database\Factories\CategoryFactory;
-use Database\Factories\ProductFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ProductControllerTest extends TestCase
+class ProductTest extends TestCase
 {
     use RefreshDatabase;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->seed(\Database\Seeders\RolePermissionSeeder::class);
+        $this->authenticateAsAdmin();
     }
 
     private function authenticateAdmin(): User

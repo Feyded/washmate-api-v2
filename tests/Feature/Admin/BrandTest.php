@@ -8,23 +8,15 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
-class BrandControllerTest extends TestCase
+class BrandTest extends TestCase
 {
     use RefreshDatabase;
 
-    protected User $user;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->user = User::factory()->create();
-        Role::create([
-            'name' => 'admin',
-        ]);
-        $this->user->assignRole('admin');
-
-        $this->actingAs($this->user);
+        $this->authenticateAsAdmin();
     }
 
     public function test_can_index_brands(): void
@@ -115,8 +107,6 @@ class BrandControllerTest extends TestCase
 
     public function test_unauthenticated_user_cannot_index_brands(): void
     {
-        auth()->logout();
-
         $response = $this->getJson('/api/admin/brands');
 
         $response->assertStatus(401);

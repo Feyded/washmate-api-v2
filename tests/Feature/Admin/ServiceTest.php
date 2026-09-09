@@ -4,19 +4,17 @@ namespace Tests\Feature\Admin;
 
 use App\Models\Service;
 use App\Models\User;
-use Database\Factories\ServiceFactory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ServiceControllerTest extends TestCase
+class ServiceTest extends TestCase
 {
     use RefreshDatabase;
 
     protected function setUp(): void
     {
         parent::setUp();
-
-        $this->seed(\Database\Seeders\RolePermissionSeeder::class);
+        $this->authenticateAsAdmin();
     }
 
     private function authenticateAdmin(): User
