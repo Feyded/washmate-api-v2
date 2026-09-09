@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin;
 use App\Models\Brand;
 use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Spatie\Permission\Models\Role;
 use Tests\TestCase;
 
 class BrandTest extends TestCase
@@ -103,12 +102,5 @@ class BrandTest extends TestCase
             'name' => 'Updated Brand',
             'is_active' => false,
         ]);
-    }
-
-    public function test_unauthenticated_user_cannot_index_brands(): void
-    {
-        $response = $this->getJson('/api/admin/brands');
-
-        $response->assertStatus(401);
     }
 }

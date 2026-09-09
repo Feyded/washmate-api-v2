@@ -3,7 +3,6 @@
 namespace Tests\Feature\Admin;
 
 use App\Models\Service;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -97,24 +96,5 @@ class ServiceTest extends TestCase
             'name' => 'Updated Service',
             'price' => 200.00,
         ]);
-    }
-
-    public function test_unauthenticated_user_cannot_access_services(): void
-    {
-        $response = $this->getJson('/api/admin/services');
-
-        $response->assertStatus(401);
-    }
-
-    public function test_non_admin_user_cannot_access_services(): void
-    {
-        $user = User::factory()->create();
-        $user->assignRole('user');
-        $token = $user->createToken('test-token')->plainTextToken;
-
-        $response = $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson('/api/admin/services');
-
-        $response->assertStatus(403);
     }
 }

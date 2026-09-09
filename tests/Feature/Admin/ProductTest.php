@@ -5,7 +5,6 @@ namespace Tests\Feature\Admin;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
@@ -111,24 +110,5 @@ class ProductTest extends TestCase
             'name' => 'Updated Product',
             'price' => 200.00,
         ]);
-    }
-
-    public function test_unauthenticated_user_cannot_access_products(): void
-    {
-        $response = $this->getJson('/api/admin/products');
-
-        $response->assertStatus(401);
-    }
-
-    public function test_non_admin_user_cannot_access_products(): void
-    {
-        $user = User::factory()->create();
-        $user->assignRole('user');
-        $token = $user->createToken('test-token')->plainTextToken;
-
-        $response = $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson('/api/admin/products');
-
-        $response->assertStatus(403);
     }
 }

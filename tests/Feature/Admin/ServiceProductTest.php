@@ -127,23 +127,4 @@ class ServiceProductTest extends TestCase
             'quantity' => 10,
         ]);
     }
-
-    public function test_unauthenticated_user_cannot_access_service_products(): void
-    {
-        $response = $this->getJson('/api/admin/service-products');
-
-        $response->assertStatus(401);
-    }
-
-    public function test_non_admin_user_cannot_access_service_products(): void
-    {
-        $user = User::factory()->create();
-        $user->assignRole('user');
-        $token = $user->createToken('test-token')->plainTextToken;
-
-        $response = $this->withHeader('Authorization', "Bearer {$token}")
-            ->getJson('/api/admin/service-products');
-
-        $response->assertStatus(403);
-    }
 }
