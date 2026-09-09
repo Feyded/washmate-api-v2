@@ -17,21 +17,8 @@ class ServiceTest extends TestCase
         $this->authenticateAsAdmin();
     }
 
-    private function authenticateAdmin(): User
-    {
-        $admin = User::factory()->create();
-        $admin->assignRole('admin');
-        $token = $admin->createToken('test-token')->plainTextToken;
-
-        $this->withHeader('Authorization', "Bearer {$token}");
-
-        return $admin;
-    }
-
     public function test_can_index_services(): void
     {
-        $this->authenticateAdmin();
-
         Service::factory()->count(3)->create();
 
         $response = $this->getJson('/api/admin/services');
@@ -45,8 +32,6 @@ class ServiceTest extends TestCase
 
     public function test_can_store_service(): void
     {
-        $this->authenticateAdmin();
-
         $payload = [
             'name' => 'Test Service',
             'price' => 150.00,
@@ -72,8 +57,6 @@ class ServiceTest extends TestCase
 
     public function test_can_show_service(): void
     {
-        $this->authenticateAdmin();
-
         $service = Service::factory()->create();
 
         $response = $this->getJson("/api/admin/services/{$service->id}");
@@ -90,8 +73,6 @@ class ServiceTest extends TestCase
 
     public function test_can_update_service(): void
     {
-        $this->authenticateAdmin();
-
         $service = Service::factory()->create();
 
         $payload = [

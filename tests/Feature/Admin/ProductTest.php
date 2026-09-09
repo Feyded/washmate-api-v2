@@ -19,21 +19,10 @@ class ProductTest extends TestCase
         $this->authenticateAsAdmin();
     }
 
-    private function authenticateAdmin(): User
-    {
-        $admin = User::factory()->create();
-        $admin->assignRole('admin');
-        $token = $admin->createToken('test-token')->plainTextToken;
 
-        $this->withHeader('Authorization', "Bearer {$token}");
-
-        return $admin;
-    }
 
     public function test_can_index_products(): void
     {
-        $this->authenticateAdmin();
-
         Product::factory()->count(3)->create();
 
         $response = $this->getJson('/api/admin/products');
@@ -47,8 +36,6 @@ class ProductTest extends TestCase
 
     public function test_can_store_product(): void
     {
-        $this->authenticateAdmin();
-
         $brand = Brand::factory()->create();
         $category = Category::factory()->create();
 
@@ -80,8 +67,6 @@ class ProductTest extends TestCase
 
     public function test_can_show_product(): void
     {
-        $this->authenticateAdmin();
-
         $product = Product::factory()->create();
 
         $response = $this->getJson("/api/admin/products/{$product->id}");
@@ -98,8 +83,6 @@ class ProductTest extends TestCase
 
     public function test_can_update_product(): void
     {
-        $this->authenticateAdmin();
-
         $product = Product::factory()->create();
         $brand = Brand::factory()->create();
         $category = Category::factory()->create();
