@@ -24,11 +24,8 @@ class UserTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJson([
-                'message' => 'Successfully retrieved users.',
-            ]);
-
-        $json = $response->json();
-        $this->assertArrayHasKey('data', $json);
-        $this->assertIsArray($json['data']);
+                'message' => 'Users retrieved successfully.',
+            ])
+            ->assertJsonCount(4, 'data');
     }
 }
